@@ -87,10 +87,10 @@ type Params struct {
 	//
 	// examples:
 	// 	1. Exp: "name = ?"
-	//	   Args: "a8m"
+	//	   Args: "leononame"
 	//
 	//	2. Exp: "name = ? AND age >= ?"
-	// 	   Args: "a8m", 22
+	// 	   Args: "leononame", 22
 	FilterExp  string
 	FilterArgs []interface{}
 }
@@ -308,6 +308,9 @@ func (p *Parser) parseField(sf reflect.StructField) error {
 	case reflect.Float32, reflect.Float64:
 		f.ValidateFn = validateFloat
 		filterOps = append(filterOps, EQ, NEQ, LT, LTE, GT, GTE)
+	case reflect.Array:
+		f.ValidateFn = validateString
+		filterOps = append(filterOps, EQ, NEQ)
 	case reflect.Struct:
 		switch v := reflect.Zero(typ); v.Interface().(type) {
 		case sql.NullBool:

@@ -2,28 +2,28 @@ version: 2
 jobs:
   unit:
     docker:
-    - image: circleci/golang:1.14
-    working_directory: /go/src/github.com/a8m/rql
+      - image: circleci/golang:1.14
+    working_directory: /go/src/github.com/leononame/rql
     steps:
-    - checkout
-    - run: go get -v -t -d ./...
-    - run: go test -v
+      - checkout
+      - run: go get -v -t -d ./...
+      - run: go test -v
 
   integration:
     machine:
       image: circleci/classic:201808-01
-    working_directory: /home/circleci/.go_workspace/src/github.com/a8m/rql
+    working_directory: /home/circleci/.go_workspace/src/github.com/leononame/rql
     environment:
       GOPATH: /home/circleci/.go_workspace
     steps:
-    - checkout
-    - run: make -C integration test
+      - checkout
+      - run: make -C integration test
 
 workflows:
   version: 2
   all:
     jobs:
-    - unit
-    - integration:
-        requires:
-        - unit
+      - unit
+      - integration:
+          requires:
+            - unit

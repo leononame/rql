@@ -592,14 +592,14 @@ func TestParse(t *testing.T) {
 			},
 			input: []byte(`{
 				"filter": {
-					"full_name": "a8m"
+					"full_name": "leononame"
 				},
 				"sort": ["full_name"]
 			}`),
 			wantOut: &Params{
 				Limit:      25,
 				FilterExp:  "full_name = ?",
-				FilterArgs: []interface{}{"a8m"},
+				FilterArgs: []interface{}{"leononame"},
 				Sort:       "full_name",
 			},
 		},
@@ -690,7 +690,7 @@ func TestParse(t *testing.T) {
 			},
 			input: []byte(`{
 				"filter": {
-					"age": "a8m",
+					"age": "leononame",
 					"name": 10
 				}
 			}`),
@@ -733,7 +733,7 @@ func TestParse(t *testing.T) {
 			},
 			input: []byte(`{
 				"filter": {
-					"age": "a8m"
+					"age": "leononame"
 				}
 			}`),
 			wantErr: true,
@@ -817,7 +817,7 @@ func TestParse(t *testing.T) {
 			},
 			input: []byte(`{
 				"filter": {
-					"age": "a8m"
+					"age": "leononame"
 				}
 			}`),
 			wantErr: true,
